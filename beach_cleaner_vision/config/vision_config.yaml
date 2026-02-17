@@ -1,0 +1,37 @@
+# Configuración del Sistema de Visión
+# Beach Cleaner Robot - TMR 2026
+
+# Información del equipo
+team_info:
+  team: "TU_EQUIPO"
+  institution: "TU_INSTITUCIÓN"
+  state: "TU_ESTADO"
+
+# Estrategia de detección visual
+vision_strategy:
+  # Prioridades de detección (mayor = más importante)
+  priorities:
+    organic_can: 100        # Lata con franja amarilla (15 pts)
+    inorganic_can: 50       # Lata negra (5 pts)
+    avoid_boundary: 200     # Evitar salir de la arena (CRÍTICO)
+    avoid_obstacle: 150     # Evitar maniquí/obstáculos
+    
+  # Distancias de seguridad (píxeles en imagen)
+  safety_margins:
+    boundary_margin: 100    # Margen de seguridad del límite
+    obstacle_margin: 80     # Margen de seguridad de obstáculos
+
+# Sistema de logging
+logging:
+  level: 'INFO'  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  save_to_file: true
+  log_dir: 'logs'
+  include_timestamp: true
+  
+# Puntuación (para referencia del equipo de visión)
+scoring_reference:
+  can_in_red: 5
+  can_in_green: 15
+  contact_mannequin: -0.25
+  leave_sand_5s: -0.25
+  wrong_separation: -5

@@ -1,0 +1,12 @@
+# Beach Cleaner Vision System
+# Dependencias de Python para el Equipo de Visión Artificial
+
+# Visión artificial (CORE)
+opencv-python>=4.8.0
+numpy>=1.24.0
+
+# Configuración
+PyYAML>=6.0
+
+# Utilidades
+Pillow>=10.0.0

@@ -1,0 +1,49 @@
+# Configuración de Cámara
+# Beach Cleaner Robot - TMR 2026
+
+# Fuente de video
+camera:
+  # Opciones: 'laptop', 'esp32cam', 'file'
+  source: 'laptop'
+  
+  # Para laptop (webcam integrada o USB)
+  laptop:
+    device_id: 0  # 0 para cámara principal, 1 para secundaria, etc.
+    resolution:
+      width: 640
+      height: 480
+    fps: 30
+    buffer_size: 1  # Reducir latencia
+  
+  # Para ESP32-CAM (cuando esté lista)
+  esp32cam:
+    ip_address: '192.168.4.1'  # IP del ESP32-CAM en modo AP
+    port: 80
+    stream_path: '/cam-hi.jpg'  # o '/cam-lo.jpg' para baja resolución
+    resolution:
+      width: 320  # Optimizado para ESP32
+      height: 240
+    quality: 10  # Calidad JPEG (0-63, menor = mejor calidad)
+    reconnect_attempts: 5
+    timeout: 5  # segundos
+  
+  # Para archivo de video (pruebas)
+  file:
+    path: 'data/test_videos/beach_test.mp4'
+    loop: true
+
+# Configuración de captura
+capture:
+  auto_exposure: true
+  auto_white_balance: true
+  brightness: 0  # -100 a 100
+  contrast: 0    # -100 a 100
+  saturation: 0  # -100 a 100
+
+# Visualización en tiempo real
+display:
+  enabled: true
+  show_fps: true
+  show_detections: true
+  window_name: 'Beach Cleaner Vision'
+  scale: 1.0  # Factor de escala para visualización

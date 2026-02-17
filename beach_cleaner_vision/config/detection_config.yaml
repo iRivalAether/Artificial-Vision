@@ -1,0 +1,94 @@
+# Configuración de Detección
+# Beach Cleaner Robot - TMR 2026
+
+# Rangos de color en HSV
+# NOTA: Estos valores son INICIALES y deben calibrarse en el escenario real
+colors:
+  # Latas negras (residuos inorgánicos)
+  black:
+    lower: [0, 0, 0]
+    upper: [180, 255, 50]
+    description: "Latas negras mate"
+  
+  # Franja amarilla (25% inferior de lata = residuo orgánico)
+  yellow:
+    lower: [20, 100, 100]
+    upper: [35, 255, 255]
+    description: "Franja amarilla en latas orgánicas"
+  
+  # Contenedor rojo (residuos generales)
+  red:
+    # El rojo cruza 0° en HSV, necesitamos dos rangos
+    lower1: [0, 100, 100]
+    upper1: [10, 255, 255]
+    lower2: [170, 100, 100]
+    upper2: [180, 255, 255]
+    description: "Aro rojo 75cm diámetro"
+  
+  # Contenedor verde (residuos orgánicos)
+  green:
+    lower: [40, 40, 40]
+    upper: [80, 255, 255]
+    description: "Aro verde 75cm diámetro"
+  
+  # Límite mar (lona azul) - CRÍTICO
+  blue:
+    lower: [100, 50, 50]
+    upper: [130, 255, 255]
+    description: "Lona azul que simula el mar"
+  
+  # Arena (para referencia)
+  sand:
+    lower: [10, 20, 100]
+    upper: [30, 150, 255]
+    description: "Arena de construcción"
+
+# Parámetros de detección de latas
+can_detection:
+  min_area: 200          # Píxeles mínimos para considerar una lata
+  max_area: 15000        # Píxeles máximos
+  min_circularity: 0.4   # 0-1, qué tan circular debe ser
+  max_circularity: 1.0
+  aspect_ratio_min: 0.3  # Altura/Ancho mínimo
+  aspect_ratio_max: 3.0  # Altura/Ancho máximo
+  
+  # Clasificación de lata con franja amarilla
+  yellow_threshold: 0.15  # % mínimo de píxeles amarillos en región inferior
+
+# Parámetros de detección de contenedores
+container_detection:
+  min_radius: 50         # Radio mínimo del círculo (píxeles)
+  max_radius: 300        # Radio máximo
+  min_circularity: 0.7   # Debe ser bastante circular
+  
+# Parámetros de detección de límites (mar)
+boundary_detection:
+  edge_threshold: 100    # Píxeles desde el borde del frame
+  blue_ratio_threshold: 0.3  # % de píxeles azules para detectar mar
+  warning_distance: 150  # Píxeles de la zona de advertencia
+
+# Parámetros de detección de obstáculos
+obstacle_detection:
+  min_area: 5000        # Área mínima para considerar un obstáculo
+  max_distance: 500     # Distancia máxima de detección (píxeles)
+  
+# Filtrado y suavizado
+filtering:
+  gaussian_kernel: 5     # Tamaño del kernel para suavizado
+  morphology_kernel: 5   # Kernel para operaciones morfológicas
+  erosion_iterations: 1
+  dilation_iterations: 2
+
+# Región de interés (ROI)
+roi:
+  enabled: false
+  top: 0.0      # Porcentaje desde arriba (0.0 - 1.0)
+  bottom: 1.0   # Porcentaje desde arriba
+  left: 0.0     # Porcentaje desde izquierda
+  right: 1.0    # Porcentaje desde izquierda
+
+# Rendimiento
+performance:
+  skip_frames: 0         # Procesar cada N frames (0 = todos)
+  resize_factor: 1.0     # Factor de redimensionamiento (< 1.0 = más rápido)
+  max_fps: 30           # FPS máximo objetivo
