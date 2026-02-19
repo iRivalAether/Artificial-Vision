@@ -2,7 +2,7 @@
 
 ---
 
-##  PERSONA 1: DETECCIÓN DE LATAS
+##  Petter: DETECCIÓN DE LATAS
 **Responsabilidad:** Detectar latas en la escena
 
 ### Archivos asignados:
